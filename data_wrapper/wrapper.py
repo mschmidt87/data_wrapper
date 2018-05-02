@@ -66,7 +66,6 @@ def load(directory, prefix=''):
             data = np.load(fn)
             d[key] = data
         except OSError:
-            import pdb; pdb.set_trace()
             try:
                 with open(fn, 'r') as f:
                     data = yaml.load(f)
