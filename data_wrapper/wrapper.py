@@ -61,13 +61,13 @@ def load(directory, prefix=''):
     files = os.listdir(directory)
     d = {}
     for fn in files:
-        key = os.path.splitext(fn)[0].split('_')[-1]
+        key = os.path.splitext(fn)[0].replace(prefix, '')
         try:
-            data = np.load(fn)
+            data = np.load(os.path.join(directory, fn))
             d[key] = data
         except OSError:
             try:
-                with open(fn, 'r') as f:
+                with open(os.path.join(directory, fn), 'r') as f:
                     data = yaml.load(f)
                 d[key] = data
             except:
